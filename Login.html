@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            .errorMessage{color: red;}
+            body {font-family: Arial, Helvetica, sans-serif;}
+            form {
+                border: 3px solid white;
+                margin: 0 auto;
+                margin-left: auto;
+                margin-right: auto;
+                text-align:center;
+            }
+
+            h1 {
+                text-align: center;
+                padding-top: 10%;
+                color: #60A49C;
+                font-size: 44px;
+                padding-bottom: 20px;
+            }   
+
+            p {
+                text-align: center;
+                padding: auto;
+            }
+
+            input[type=text], input[type=password] {
+                width: 469px;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                box-sizing: border-box;
+                border-radius: 30px;
+                background-color: #60A49C;
+                color: white;
+                font-size: 16px;
+                
+            }
+
+            ::placeholder {
+                color: white;
+                opacity: 1;
+            }
+
+            :-ms-input-placeholder {
+                color: white;
+            }
+
+            ::-ms-input-placeholder {
+                color: white;
+            }
+
+            button {
+                background-color: #294853;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                cursor: pointer;
+                width: 469px;
+                border-radius: 30px;
+                font-size: 16px;
+            }
+
+            button:hover {
+                opacity: 0.8;
+            }
+
+            .container {
+                padding: 16px;
+            }
+
+            span.psw {
+                float: none;
+                padding-top: 8px;
+            }
+
+            @media screen and (max-width: 300px) {
+                span.psw {
+                    display: block;
+                    float: none;
+                }
+            }
+        </style>
+        <title>Assignment Tracker - Sign in</title>
+    </head>
+    <body>
+        <h1>Sign in</h1>
+        <p>Enter your email and password below.</p>
+
+        <form action="../Project/home.html" method="GET">
+            <div class="container">
+                <input type="text" placeholder="Enter Email" name="Email" id="Email" required><br/>
+                <input type="password" placeholder="Enter Password" name="psw" minlength="8" required><br/>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+            </div>
+            
+            <div class="container">
+                <button type="submit" name="login" onclick="Validate()">Login</button>
+            </div>
+            <div class="container">
+                <span class="psw"><a href="#">Forgot password?</a></span>
+            </div>
+        </form>
+        <script type="text/javascript">
+            function Validate() {
+                var regex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
+                var isValid = regex.test(document.getElementById("Email").value);
+                if (!isValid) {
+                    alert("Enter a valid email address.");
+                }
+                return isValid;
+            }
+        </script>
+
+    </body>
+</html>
