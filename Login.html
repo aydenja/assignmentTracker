@@ -8,13 +8,14 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="StyleSheets/Login.css">
+        <script src="Scripts/Login.js"></script>
         <title>Assignment Tracker - Sign in</title>
     </head>
     <body>
         <h1>Sign in</h1>
         <p>Enter your email and password below.</p>
 
-        <form action="../assignment-tracker/Home.html" method="GET">
+        <form id="formUserDetails" action="" > <!--action="../assignment-tracker/Home.html" method="GET"-->
             <div class="container">
                 <input type="text" placeholder="Enter Email" name="Email" id="Email" required><br/>
                 <input type="password" placeholder="Enter Password" name="psw" minlength="8" required><br/>
@@ -30,18 +31,5 @@
                 <span class="psw"><a href="#">Forgot password?</a></span>
             </div>
         </form>
-        <script type="text/javascript">
-            function Validate() {
-                var regex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
-                var isValid = regex.test(document.getElementById("Email").value);
-                if (!isValid) {
-                    //location.reload();
-                    alert("Enter a valid email address.");
-                    
-                }
-                return isValid;
-            }
-        </script>
-
     </body>
 </html>
