@@ -5,7 +5,7 @@
  */
 
  function Validate() {
-    var alpha = /^([a-zA-Z]+) ([a-zA-Z])$/
+    var alpha = (/[a-zA-Z]/)
     var isName = alpha.test(document.getElementById("Name").value);
     var email = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
     var isEmail = email.test(document.getElementById("Email").value);
