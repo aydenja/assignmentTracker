@@ -12,7 +12,10 @@ function Validate() {
     } else if(document.getElementById("pwd").value.length < 8) {
         alert("Enter a valid password.");
     } else {
-        window.open("../assignment-tracker/Home.html", "_self");
+        window.open("../assignment-tracker/Home.html"/*, "_self"*/);
+        // window.location.replace("../Home.html");
+        //location.href = "../Home.html";
+        return false;
     }
     return isValid;
 }
