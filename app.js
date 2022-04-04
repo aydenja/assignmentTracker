@@ -29,8 +29,8 @@ app.use(limiter);
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
-app.get('/', function(req,res){
-  res.render("Login")
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname + '/views/Login.html'));
 });
 
 
