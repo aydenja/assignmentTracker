@@ -9,12 +9,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="StyleSheets/CreateUser.css">
         <script src="Scripts/CreateUser.js"></script>
+        <script src="/app.js"></script>
         <title>Assignment Tracker - Sign up</title>
     </head>
     <body>
         <h1>Sign up</h1>
 
-        <form id="formUserDetails" action="" >
+        <form id="formUserDetails" action= "/add" method="POST" >
             <div class="container">
                 <input type="text" placeholder="Enter Full Name" name="Name" id="Name" required><br/>
                 <input type="text" placeholder="Enter Email" name="Email" id="Email" required><br/>
@@ -28,4 +29,5 @@
             </div>
         </form>
     </body>
+    
 </html>

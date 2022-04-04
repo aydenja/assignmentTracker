@@ -1,0 +1,36 @@
+{%load static%}
+<!--
+    Siddharthan Prakash
+    3/30/2022
+-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{%static 'login/CreateUser.css'%}">
+        <!-- <script src="/Users/akashsetti/Documents/COM S319 Project/assignment-tracker/Scripts/CreateUser.js"></script> -->
+        <!-- <script src="/app.js"></script> -->
+        <title>Assignment Tracker - Sign up</title>
+    </head>
+    <body>
+        <h1>Sign up</h1>
+
+        <form id="formUserDetails" method="POST" >
+            {%csrf_token%}
+            <div class="container">
+                <input type="text" placeholder="Enter Full Name" name="Name" id="Name" required><br/>
+                <input type="text" placeholder="Enter Email" name="Email" id="Email" required><br/>
+                <input type="password" placeholder="Enter Password" name="psw" id="pwd" minlength="8" required><br/>
+                <input type="password" placeholder="Confirm Password" name="confPsw" id="confPwd" minlength="8" required><br/>
+            </div>
+            
+            <div class="container">
+                <!-- onclick="Validate()" -->
+                <button type="submit" name="creatUsr">Sign Up</button>
+            </div>
+            
+        </form>
+    </body>
+    
+</html>
