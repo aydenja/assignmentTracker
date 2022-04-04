@@ -34,9 +34,6 @@ app.get('/', function(req,res){
 });
 
 
-
-let sql = `CALL addUser(?, ?, ?, ?)`;
-
 // connection.query(sql, req.body.Email, req.body.password, req.body.Name, req.body.Name)
 
 //use req.body to get data from forms
