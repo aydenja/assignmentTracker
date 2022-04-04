@@ -22,5 +22,10 @@
     } else {
         return true;
     }
-    //return isEmail;
+    return false;
+}
+
+function goBack() {
+    window.location.href = "/views/Login.html";
+    return false;
 }

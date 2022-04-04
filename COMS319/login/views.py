@@ -2,7 +2,8 @@ from urllib import request
 from django.shortcuts import render
 # import pyodbc
 from .models import Login
-import mysql.connector
+# import mysql.connector
+from mysql.connector import (connect)
 
 
 # conn = pyodbc.connect('Driver={Devart ODBC Driver for MySQL};'

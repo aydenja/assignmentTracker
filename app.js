@@ -41,8 +41,9 @@ app.get('/', function(req,res){
 
 //need to 
 app.post('/add',(req, res) => {
+
   var name = req.body.fname.split(' ');
-  con.query("call addUser(?,?,?,?)", [req.body.username, req.body.phash[0].toString(), name[0], name[1]], function (err, results, fields) {
+  con.query("call addUser(?,?,?,?)", [req.body.username, req.body.phash[0].toString(), req.body.fname, req.body.lname], function (err, results, fields) {
     if (err) {
         console.log("err:", err);
         res.end('There was an error adding user');
