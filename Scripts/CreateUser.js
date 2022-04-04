@@ -4,7 +4,7 @@
  * @returns true if email is in correct format.
  */
 
-//  document.getElementById("sb").addEventListener("click", Validate); 
+
 
  function Validate() {
     var alpha = (/[a-zA-Z]/)
