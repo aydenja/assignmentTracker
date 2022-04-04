@@ -30,14 +30,27 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 app.get('/', function(req,res){
-  res.render("Login")
+  res.render("CreateUser")
 });
 
 
+
+let sql = `CALL addUser(?, ?, ?, ?)`;
+
+// connection.query(sql, req.body.Email, req.body.password, req.body.Name, req.body.Name)
+
 //use req.body to get data from forms
 app.post('/add',(req, res) => {
-  console.log(req.body);
-  res.end('Added user (not really tho)');
+  con.query("call addUser(?,?,?,?)", [req.body.username, req.body.phash[0], req.body.fname, ""], function (err) {
+    if (err) {
+        console.log("err:", err);
+    } else {
+        console.log("results:", req.body);
+    }
+
+});
+
+
   });
 app.post('/login',(req, res) => {
   console.log(req.body);
