@@ -41,7 +41,7 @@ let sql = `CALL addUser(?, ?, ?, ?)`;
 
 //use req.body to get data from forms
 app.post('/add',(req, res) => {
-  con.query("call addUser(?,?,?,?)", [req.body.username, req.body.phash[0], req.body.fname, ""], function (err) {
+  con.query("call addUser(?,?,?,?)", [req.body.username, req.body.phash[0].toString(), req.body.fname, ""], function (err) {
     if (err) {
         console.log("err:", err);
     } else {
