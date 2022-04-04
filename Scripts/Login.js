@@ -3,7 +3,6 @@
  * @returns true if email is in correct format.
  */
 
- document.getElementById("sb").addEventListener("click", Validate); 
 
 function Validate() {
     var regex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/

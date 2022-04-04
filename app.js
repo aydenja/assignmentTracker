@@ -13,7 +13,8 @@ var con = mysql.createConnection({
   host:'coms-319-g27.class.las.iastate.edu',
   user:'gp27',
   password:'Password@!1',
-  database:'gp27'
+  database:'gp27',
+  multipleStatements: true
 });
 
 const limiter = rateLimit({
@@ -30,18 +31,48 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 app.get('/', function(req,res){
-  res.render("Login")
+  res.render("Login");
 });
 
 
+// connection.query(sql, req.body.Email, req.body.password, req.body.Name, req.body.Name)
+
 //use req.body to get data from forms
+
+//need to 
 app.post('/add',(req, res) => {
-  console.log(req.body);
-  res.end('Added user (not really tho)');
+  var name = req.body.fname.split(' ');
+  con.query("call addUser(?,?,?,?)", [req.body.username, req.body.phash[0].toString(), name[0], name[1]], function (err, results, fields) {
+    if (err) {
+        console.log("err:", err);
+        res.end('There was an error adding user');
+    } else {
+      console.log(results);
+      res.end('User created!');
+    }
+    res.end()
+
   });
+});
+
 app.post('/login',(req, res) => {
   console.log(req.body);
-  res.render('Home');
+  con.query("call loginUser(?, ?, @output); select @output;", [req.body.Email, req.body.psw], function (err, results, fields) {
+    if (err) {
+        console.log("err:", err);
+    } else {
+      var rows = JSON.stringify(JSON.parse(JSON.stringify(results[1])));
+      console.log(rows);
+       if(rows.includes('Login Success')){
+              res.end("Login was a success!");
+        }
+        else{
+          res.end("Login failed");
+        } 
+    }
+    res.end()
+
+  });
   });
 
 
