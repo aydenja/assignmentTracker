@@ -4,6 +4,8 @@
  * @returns true if email is in correct format.
  */
 
+ document.getElementById("sb").addEventListener("click", Validate); 
+
  function Validate() {
     var alpha = (/[a-zA-Z]/)
     var isName = alpha.test(document.getElementById("Name").value);
@@ -18,8 +20,7 @@
     } else if(document.getElementById("confPwd").value != document.getElementById("pwd").value) {
         alert("Passwords do not match.");
     } else {
-        //need to also implement: check if email already exists
-        window.open("../assignment-tracker/Login.html", "_self");
+        return true;
     }
-    return isEmail;
+    //return isEmail;
 }

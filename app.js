@@ -1,4 +1,3 @@
-var sqlite3 = require('sqlite3').verbose();
 var express = require('express');
 var http = require('http');
 var path = require("path");
@@ -22,55 +21,32 @@ const limiter = rateLimit({
   max: 100 // limit each IP to 100 requests per windowMs
 });
 
-// const dbPath = path.resolve(__dirname, '../assignment tracker/gp27.sql')
-// var db = new sqlite3.Database(dbPath);
-
-
-// var db = new sqlite3.Database('../assignment tracker/gp27.sql');
-// var db = new sqlite3.Database( path.resolve('../assignment tracker/gp27.sql', 'db.sqlite') );
-
 
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.static(path.join('/Users/akashsetti/Documents/COM S319 Project/assignment-tracker/gp27.sql','./public')));
+app.use(express.static(__dirname));
 app.use(helmet());
 app.use(limiter);
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+
+app.get('/', function(req,res){
+  res.render("Login")
+});
 
 
-app.post('/add', function(req,res){
-    (()=>{
-        con.adduser(Name, Email, psw, confPsw, function(err) {
-        if (err) {
-          return console.log(err.message);
-        }
-        console.log("New employee has been added");
-        res.send("New employee has been added into the database with ID = "+req.body.id+ " and Name = "+req.body.name);
-      });
+//use req.body to get data from forms
+app.post('/add',(req, res) => {
+  console.log(req.body);
+  res.end('Added user (not really tho)');
   });
-  });
-
-
-//   con.run('CREATE TABLE IF NOT EXISTS emp(id TEXT, name TEXT)');
-  app.get('/', function(req,res){
-    res.sendFile(path.join('','/Users/akashsetti/Documents/COM S319 Project/assignment-tracker/CreateUser.html'));
+app.post('/login',(req, res) => {
+  console.log(req.body);
+  res.render('Home');
   });
 
 
-  app.get('/', function(req,res){
-    res.sendFile(path.join('','/Users/akashsetti/Documents/COM S319 Project/assignment-tracker/StyleSheets/CreateUser.css'));
 
-  });
 
-  app.get('/close', function(req,res){
-    con.close((err) => {
-      if (err) {
-        res.send('There is some error in closing the database');
-        return console.error(err.message);
-      }
-      console.log('Closing the database connection.');
-      res.send('Database connection successfully closed');
-    });
-  });
-
-server.listen(3306,function(){ 
-    console.log("Server listening on port: 3306");
+server.listen(3000,function(){ 
+    console.log("Server listening on port: 3000");
 })

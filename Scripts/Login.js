@@ -3,6 +3,8 @@
  * @returns true if email is in correct format.
  */
 
+ document.getElementById("sb").addEventListener("click", Validate); 
+
 function Validate() {
     var regex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
     var isValid = regex.test(document.getElementById("Email").value);
@@ -12,10 +14,7 @@ function Validate() {
     } else if(document.getElementById("pwd").value.length < 8) {
         alert("Enter a valid password.");
     } else {
-        window.open("../assignment-tracker/Home.html"/*, "_self"*/);
-        // window.location.replace("../Home.html");
-        //location.href = "../Home.html";
-        return false;
+        
     }
     return isValid;
 }
