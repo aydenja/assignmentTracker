@@ -24,7 +24,7 @@ p {
     padding: auto;
 }
 
-input[type=text], input[type=password] {
+input[type=text], [type=password] {
     width: 469px;
     padding: 12px 20px;
     margin: 8px 0;
@@ -36,6 +36,7 @@ input[type=text], input[type=password] {
     color: white;
     font-size: 16px;            
 }
+
 
 ::placeholder {
     color: white;
@@ -60,4 +61,16 @@ button:hover {
 
 .container {
     padding: 16px;
+}
+
+span.Back {
+    float: none;
+    padding-top: 8px;
+}
+
+@media screen and (max-width: 300px) {
+    span.Back {
+        display: block;
+        float: none;
+    }
 }
