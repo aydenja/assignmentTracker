@@ -28,7 +28,7 @@ app.use(express.static(__dirname));
 app.use(helmet());
 app.use(limiter);
 app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
+app.set('view engine', 'ejs');
 
 app.get('/', function(req,res){
   res.render("Login");
@@ -65,16 +65,25 @@ app.post('/login',(req, res) => {
       var rows = JSON.stringify(JSON.parse(JSON.stringify(results[1])));
       console.log(rows);
        if(rows.includes('Login Success')){
-              res.end("Login was a success!");
-        }
-        else{
-          res.end("Login failed");
-        } 
-    }
-    res.end()
+        con.query("select fname from users where username = ?;", [req.body.Email], function (err, results, fields){
+          if (err) {
+            console.log("err:", err);
+          }
+          else{
+            var out = (Object.values(JSON.parse(JSON.stringify(results))));
+            res.render("Home", {
+              name: out[0].fname,
+            });
+          }   
+        });
+      }
+      else {
+        res.end("Invalid login!");
+      }  
+  }
+  });
+});
 
-  });
-  });
 
 
 
