@@ -68,6 +68,7 @@ app.post('/login',(req, res) => {
               res.end("Login was a success!");
         }
         else{
+          // location.reload()
           res.end("Login failed");
         } 
     }
