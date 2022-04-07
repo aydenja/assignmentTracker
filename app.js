@@ -28,7 +28,7 @@ app.use(express.static(__dirname));
 app.use(helmet());
 app.use(limiter);
 app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'ejs');
+app.set('view engine', 'html');
 
 app.get('/', function(req,res){
   res.render("Login");
@@ -71,9 +71,11 @@ app.post('/login',(req, res) => {
           }
           else{
             var out = (Object.values(JSON.parse(JSON.stringify(results))));
+            app.set('view engine', 'ejs');
             res.render("Home", {
               name: out[0].fname,
             });
+            app.set('view engine', 'html');
           }   
         });
       }
