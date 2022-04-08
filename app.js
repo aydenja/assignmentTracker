@@ -14,12 +14,12 @@ var con = mysql.createConnection({
   user:'gp27',
   password:'Password@!1',
   database:'gp27',
-  multipleStatements: true
+  multipleStatements: true
 });
 
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limit each IP to 100 requests per windowMs
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
 });
 
 
@@ -31,7 +31,7 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 app.get('/', function(req,res){
-  res.render("Login");
+  res.render("Login");
 });
 
 
@@ -42,44 +42,54 @@ app.get('/', function(req,res){
 //need to 
 app.post('/add',(req, res) => {
 
-  var name = req.body.fname.split(' ');
-  con.query("call addUser(?,?,?,?)", [req.body.username, req.body.phash[0].toString(), req.body.fname, req.body.lname], function (err, results, fields) {
-    if (err) {
-        console.log("err:", err);
-        res.end('There was an error adding user');
-    } else {
-      console.log(results);
-      res.end('User created!');
-    }
-    res.end()
+  var name = req.body.fname.split(' ');
+  con.query("call addUser(?,?,?,?)", [req.body.username, req.body.phash[0].toString(), req.body.fname, req.body.lname], function (err, results, fields) {
+    if (err) {
+        console.log("err:", err);
+        res.end('There was an error adding user');
+    } else {
+      console.log(results);
+      res.end('User created!');
+    }
+    res.end()
 
-  });
+  });
 });
 
 app.post('/login',(req, res) => {
-  console.log(req.body);
-  con.query("call loginUser(?, ?, @output); select @output;", [req.body.Email, req.body.psw], function (err, results, fields) {
-    if (err) {
-        console.log("err:", err);
-    } else {
-      var rows = JSON.stringify(JSON.parse(JSON.stringify(results[1])));
-      console.log(rows);
-       if(rows.includes('Login Success')){
-              res.end("Login was a success!");
-        }
-        else{
-          // location.reload()
-          res.end("Login failed");
-        } 
-    }
-    res.end()
+  console.log(req.body);
+  con.query("call loginUser(?, ?, @output); select @output;", [req.body.Email, req.body.psw], function (err, results, fields) {
+    if (err) {
+        console.log("err:", err);
+    } else {
+      var rows = JSON.stringify(JSON.parse(JSON.stringify(results[1])));
+      console.log(rows);
+       if(rows.includes('Login Success')){
+        con.query("select fname from users where username = ?;", [req.body.Email], function (err, results, fields){
+          if (err) {
+            console.log("err:", err);
+          }
+          else{
+            var out = (Object.values(JSON.parse(JSON.stringify(results))));
+            app.set('view engine', 'ejs');
+            res.render("Home", {
+              name: out[0].fname,
+            });
+            app.set('view engine', 'html');
+          }   
+        });
+      }
+      else {
+        res.end("Invalid login!");
+      }  
+  }
+  });
+});
 
-  });
-  });
 
 
 
 
 server.listen(3000,function(){ 
-    console.log("Server listening on port: 3000");
+    console.log("Server listening on port: 3000");
 })
