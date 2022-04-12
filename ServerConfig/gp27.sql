@@ -4,6 +4,8 @@ create database gp27;
 use gp27;
 drop table if exists users;
 
+SET FOREIGN_KEY_CHECKS=0;
+
 -- user table will store info about each user
 create table users
 (
@@ -13,6 +15,21 @@ create table users
     fname varchar(40),
     lname varchar(40), 
     primary key(UserID)
+);
+
+drop table if exists assignments;
+
+-- user table will store info about each user
+create table assignments
+(
+	UserID INT,
+	class varchar(40),
+    aname varchar(40),
+    dyear INT,
+    dmonth INT, 
+    dday INT,
+    primary key(UserID, class, aname),
+    foreign key (UserID)references users(UserID)
 );
 
 
@@ -32,8 +49,9 @@ delimiter ;
 truncate users;
 
 -- adding admin account for testing
-call adduser('Admin', 'password', 'Admin', '');
-
+call adduser('admin@test.com', 'password', 'Admin', '');
+insert into assignments values (1, 'COM S 363', 'HW-1', 2022, 4, 30);
+insert into assignments values (1, 'COM S 363', 'HW-2', 2022, 4, 31);
 
 -- procedure is used for looging users in, checks to make sure that the username/password is correct
 -- used by 'call loginUser (username, password, message);'
@@ -54,6 +72,8 @@ else
 end if;
 end;//
 delimiter ;
+
+SET FOREIGN_KEY_CHECKS=1;
 
 -- Example use of login stored procedure
 -- set @message = '';

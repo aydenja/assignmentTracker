@@ -65,17 +65,25 @@ app.post('/login',(req, res) => {
       var rows = JSON.stringify(JSON.parse(JSON.stringify(results[1])));
       console.log(rows);
        if(rows.includes('Login Success')){
-        con.query("select fname from users where username = ?;", [req.body.Email], function (err, results, fields){
+        con.query("select fname, UserID from users where username = ?;", [req.body.Email], function (err, results, fields){
           if (err) {
             console.log("err:", err);
           }
           else{
-            var out = (Object.values(JSON.parse(JSON.stringify(results))));
-            app.set('view engine', 'ejs');
-            res.render("Home", {
-              name: out[0].fname,
-            });
-            app.set('view engine', 'html');
+            var out = (Object.values(JSON.parse(JSON.stringify(results))));
+            con.query("select * from assignments where UserID = ?;", out[0].UserID, function (err, data, fields){
+            if (err) {
+              console.log("err:", err);
+            }
+            else{
+              app.set('view engine', 'ejs');
+              res.render("Home", {
+                name: out[0].fname,
+                userData: data
+              });
+              app.set('view engine', 'html');
+            }
+            });
           }   
         });
       }

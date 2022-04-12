@@ -9,5 +9,43 @@
             HOME
         </h1>
         <p>Welcome <%=name%>, You are logged in.</p>
+
+        <div class="table-data">
+            <h2><%=name%>'s Assignments</h2>
+                <table border="1">
+                    <tr>
+                        <th>UserID</th>
+                        <th>Class</th>
+                        <th>Assignment</th>
+                        <th>Year</th>
+                        <th>Month</th>
+                        <th>Day</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    
+                    <%
+                    if(userData.length!=0){
+                    var i=1;
+                    userData.forEach(function(data){
+                    %>
+                    <tr>
+                        <td><%=data.UserID %></td>
+                        <td><%=data.class %></td>
+                        <td><%=data.aname %></td>
+                        <td><%=data.dyear %></td>
+                        <td><%=data.dmonth %></td>
+                        <td><%=data.dday %></td>
+                        <td><a href="/users/edit/<%=data.UserID%>">Edit</a></td>
+                        <td><a href="/users/delete/<%=data.UserID%>">Delete</a></td>
+                    </tr>
+                    <%  i++; }) %>
+                    <% } else{ %>
+                        <tr>
+                            <td colspan="7">No Data Found</td>
+                        </tr>
+                    <% } %>
+                </table>
+                </div>
     </body>
 </html>
