@@ -29,3 +29,19 @@ th, td {
 table {
     border-top: 5px solid black;
 }
+
+body {
+    padding-left: 20px;
+}
+
+button {
+    background-color: #294853;
+    color: white;
+    padding: 17px 20px;
+    margin: 25px 20px;
+    border: none;
+    cursor: pointer;
+    width: 150px;
+    border-radius: 15px;
+    font-size: 14px;
+}
