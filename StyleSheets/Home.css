@@ -11,9 +11,9 @@ h1 {
 h2 {
     text-align: left;
     padding-top: 0.03%;
-    color: #60A49C;
+    color: black;
     font-size: 22px;
-    padding-bottom: 20px;
+    padding-bottom: 1px;
 }
 
 p {
@@ -21,6 +21,11 @@ p {
     padding: auto;
 }
 
-th {
+th, td {
     padding-left: 10px;
+    text-align: center;
+}
+
+table {
+    border-top: 5px solid black;
 }
