@@ -67,6 +67,11 @@ span.Back {
     float: none;
     padding-top: 8px;
 }
+span.version {
+    float: none;
+    padding: 3px;
+    font-size: 11px;
+}
 
 @media screen and (max-width: 300px) {
     span.Back {

@@ -2,10 +2,10 @@
 body {font-family: Arial, Helvetica, sans-serif;}
 h1 {
     text-align: left;
-    padding-top: 1%;
+    padding-top: 0.4%;
     color: #60A49C;
     font-size: 44px;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
 }
 
 h2 {
@@ -19,4 +19,8 @@ h2 {
 p {
     text-align: center;
     padding: auto;
+}
+
+th {
+    padding-left: 10px;
 }
