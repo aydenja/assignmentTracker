@@ -6,15 +6,12 @@
     </head>
     <body>
         <h1>
-            HOME
+            Welcome, <%=name%>
         </h1>
-        <p>Welcome <%=name%>, You are logged in.</p>
-
         <div class="table-data">
-            <h2><%=name%>'s Assignments</h2>
-                <table border="1">
+            <h2>Today's Assignments</h2>
+                <table>
                     <tr>
-                        <th>UserID</th>
                         <th>Class</th>
                         <th>Assignment</th>
                         <th>Year</th>
@@ -30,7 +27,6 @@
                     userData.forEach(function(data){
                     %>
                     <tr>
-                        <td><%=data.UserID %></td>
                         <td><%=data.class %></td>
                         <td><%=data.aname %></td>
                         <td><%=data.dyear %></td>
@@ -46,6 +42,10 @@
                         </tr>
                     <% } %>
                 </table>
-                </div>
+        </div>
+        <div class="btns">
+            <button type="button" id="add" name="Add">Add Assignment</button>
+            <button type="button" id="view" name="View">View Assignments</button>
+        </div>
     </body>
 </html>
