@@ -28,10 +28,20 @@ app.use(express.static(__dirname));
 app.use(helmet());
 app.use(limiter);
 app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
+app.set('view engine', 'ejs');
 
 app.get('/', function(req,res){
   res.render("Login");
+});
+
+app.get('/CreateUser', function(req,res){
+    res.render("CreateUser", {
+                  usc: false,
+                });
+});
+
+app.get('/edit', function(req,res){
+    res.send("userId is set to " + req.query.uid)
 });
 
 
@@ -49,7 +59,9 @@ app.post('/add',(req, res) => {
         res.end('There was an error adding user');
     } else {
       console.log(results);
-      res.end('User created!');
+      res.render("CreateUser", {
+                usc: true,
+              });
     }
     res.end()
 
@@ -76,12 +88,10 @@ app.post('/login',(req, res) => {
               console.log("err:", err);
             }
             else{
-              app.set('view engine', 'ejs');
               res.render("Home", {
                 name: out[0].fname,
                 userData: data
               });
-              app.set('view engine', 'html');
             }
             });
           }   
