@@ -81,5 +81,12 @@ SET FOREIGN_KEY_CHECKS=1;
 -- select @message as message;
 
 
-	
+drop procedure if exists addAssignment;
+delimiter //
+create procedure addAssignment(IN n_UserID INT,IN n_class varchar(40),IN n_aname varchar(40),IN n_dyear INT,IN n_dmonth INT, IN n_dday INT)
+begin
+insert into assignments (UserID, class, aname, dyear, dmonth, dday)
+values (n_UserID, n_class, n_aname, n_dyear, n_dmonth, n_dday);
+end;//
+delimiter ;
 
