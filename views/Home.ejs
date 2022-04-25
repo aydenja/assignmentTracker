@@ -33,7 +33,7 @@
                         <td><%=data.dmonth %></td>
                         <td><%=data.dday %></td>
                         <% 
-                        var s = "/edit/?uid=" + data.UserID + "&aname=" + data.aname + "&aclass=" + data.class + "&dday=" + data.dday + "&dmonth=" + data.dmonth+ "&dyear=" + data.dyear;
+                        var s = "/edit/?aid=" + data.aid + "&aname=" + data.aname + "&aclass=" + data.class + "&dday=" + data.dday + "&dmonth=" + data.dmonth+ "&dyear=" + data.dyear + "&uid=" + data.UserID;
                         s.replaceAll(' ', '-');
                         %>
                         <td><a href="<%=s.replaceAll(' ', '-');%>">Edit</a></td>

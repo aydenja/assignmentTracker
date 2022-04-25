@@ -43,6 +43,8 @@ app.get('/CreateUser', function(req,res){
 app.get('/edit', function(req,res){
   console.log(req.query.aclass);
   res.render("Edit", {
+    aid: req.query.aid,
+    uid: req.query.uid,
     aname: req.query.aname,
     aclass: req.query.aclass,
     dday: req.query.dday,
@@ -112,6 +114,39 @@ app.post('/login',(req, res) => {
   });
 });
 
+
+
+app.post('/updateA',(req, res) => {
+
+    con.query("call updateAssignment(?,?,?,?, ?, ?, ?)", [req.body.aid, req.body.uid, req.body.aclass, req.body.aname, req.body.dyear, req.body.dmonth, req.body.dday], function (err, results, fields) {
+      if (err) {
+          console.log("err:", err);
+          res.end('There was an error updating assignment user');
+      } else {
+        console.log(results);
+        con.query("select fname from users where UserID = ?;", [req.body.uid], function (err, results, fields){
+              if (err) {
+                console.log("err:", err);
+              }
+              else{
+                var out = (Object.values(JSON.parse(JSON.stringify(results))));
+                con.query("select * from assignments where UserID = ?;", req.body.uid, function (err, data, fields){
+                if (err) {
+                  console.log("err:", err);
+                }
+                else{
+                  res.render("Home", {
+                    name: out[0].fname,
+                    userData: data
+                  });
+                }
+                });
+              }   
+            });
+      }
+  
+    });
+  });
 
 
 

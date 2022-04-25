@@ -22,13 +22,14 @@ drop table if exists assignments;
 -- user table will store info about each user
 create table assignments
 (
-	UserID INT,
+	aid INT auto_increment,
+    UserID INT,
 	class varchar(40),
     aname varchar(40),
     dyear INT,
     dmonth INT, 
     dday INT,
-    primary key(UserID, class, aname),
+    primary key(aid, UserID, class, aname),
     foreign key (UserID)references users(UserID)
 );
 
@@ -50,8 +51,6 @@ truncate users;
 
 -- adding admin account for testing
 call adduser('admin@test.com', 'password', 'Admin', '');
-insert into assignments values (1, 'COM S 363', 'HW-1', 2022, 4, 30);
-insert into assignments values (1, 'COM S 363', 'HW-2', 2022, 4, 31);
 
 -- procedure is used for looging users in, checks to make sure that the username/password is correct
 -- used by 'call loginUser (username, password, message);'
@@ -90,3 +89,17 @@ values (n_UserID, n_class, n_aname, n_dyear, n_dmonth, n_dday);
 end;//
 delimiter ;
 
+drop procedure if exists updateAssignment;
+delimiter //
+create procedure updateAssignment(IN n_aid INT, IN n_UserID INT,IN n_class varchar(40),IN n_aname varchar(40),IN n_dyear INT,IN n_dmonth INT, IN n_dday INT)
+begin
+update assignments 
+set UserID = n_UserID, class = n_class, aname=n_aname, dyear= n_dyear, dmonth=n_dmonth, dday=n_dday
+where aid = n_aid;
+end;//
+delimiter ;
+
+
+call addAssignment (1, 'COM-S-363', 'HW-1', 2022, 4, 30);
+call addAssignment (1, 'COM-S-363', 'HW-2', 2022, 4, 31);
+call updateAssignment(1, 1, 'COM-S-363', 'HW-1', 2022, 4, 20);

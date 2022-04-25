@@ -11,15 +11,17 @@
         <form id="formeditassignment" action= "/updateA" method="POST" >
             <div class="container">
                 Assignment Name: <br/>
-                <input type="text" value = <%=aname%> required><br/>
+                <input type="text" name = "aname" value = <%=aname%> required><br/>
                 Class: <br/>
-                <input type="text" value = <%=aclass%> required><br/>
+                <input type="text" name = "aclass" value = <%=aclass%> required><br/>
                 Due Date: <br/>
-                <input type="text" value = <%=dday%> required><br/>
+                <input type="text" name = "dday" value = <%=dday%> required><br/>
                 Due Month: <br/>
-                <input type="text" value = <%=dmonth%> required><br/>
+                <input type="text" name = "dmonth" value = <%=dmonth%> required><br/>
                 Due Year: <br/>
-                <input type="text" value = <%=dyear%> required><br/>
+                <input type="text" name = "dyear" value = <%=dyear%> required><br/>
+                <input type="hidden" name="aid" value= <%=aid%> />
+                <input type="hidden" name="uid" value= <%=uid%> />
             </div>
             
             <div class="container">
