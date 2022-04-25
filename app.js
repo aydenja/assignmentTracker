@@ -41,7 +41,15 @@ app.get('/CreateUser', function(req,res){
 });
 
 app.get('/edit', function(req,res){
-    res.send("userId is set to " + req.query.uid)
+  console.log(req.query.aclass);
+  res.render("Edit", {
+    aname: req.query.aname,
+    aclass: req.query.aclass,
+    dday: req.query.dday,
+    dmonth: req.query.dmonth,
+    dyear: req.query.dyear
+    });
+    //res.send("userId is set to " + req.query.uid + " aname = " + req.query.aname + " class = "+ req.query.class);
 });
 
 

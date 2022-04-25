@@ -32,7 +32,11 @@
                         <td><%=data.dyear %></td>
                         <td><%=data.dmonth %></td>
                         <td><%=data.dday %></td>
-                        <td><a href="/edit/?uid=<%=data.UserID%>">Edit</a></td>
+                        <% 
+                        var s = "/edit/?uid=" + data.UserID + "&aname=" + data.aname + "&aclass=" + data.class + "&dday=" + data.dday + "&dmonth=" + data.dmonth+ "&dyear=" + data.dyear;
+                        s.replaceAll(' ', '-');
+                        %>
+                        <td><a href="<%=s.replaceAll(' ', '-');%>">Edit</a></td>
                         <td><a href="/users/delete/<%=data.UserID%>">Delete</a></td>
                     </tr>
                     <%  i++; }) %>
