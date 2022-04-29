@@ -78,6 +78,24 @@ app.post('/add',(req, res) => {
   });
 });
 
+
+// app.post('/add',(req, res) => {
+//     var name = req.body.fname.split(' ');
+//     con.query("call addAssignment(?,?,?,?,?)", [], function (err, results, fields) {
+//       if (err) {
+//           console.log("err:", err);
+//           res.end('There was an error adding user');
+//       } else {
+//         console.log(results);
+//       }
+//       res.end()
+  
+//     });
+//   });
+
+
+
+
 app.post('/login',(req, res) => {
   console.log(req.body);
   con.query("call loginUser(?, ?, @output); select @output;", [req.body.Email, req.body.psw], function (err, results, fields) {
