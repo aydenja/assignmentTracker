@@ -79,12 +79,12 @@ app.post('/add',(req, res) => {
 });
 
 
-// app.post('/add',(req, res) => {
-//     var name = req.body.fname.split(' ');
-//     con.query("call addAssignment(?,?,?,?,?)", [], function (err, results, fields) {
+// app.post('/addassignment',(req, res) => {
+//   //   var name = req.body.fname.split(' ');
+//     con.query("call addAssignment(?,?,?,?,?,?)", ["1", req.body.course, req.body.assignment, req.body.yr, req.body.mnth, req.body.day], function (err, results, fields) {
 //       if (err) {
 //           console.log("err:", err);
-//           res.end('There was an error adding user');
+//           res.end('There was an error adding the assignment');
 //       } else {
 //         console.log(results);
 //       }
