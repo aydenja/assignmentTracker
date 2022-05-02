@@ -7,7 +7,8 @@ h1 {
     font-size: 35px;
     padding-bottom: 5px;
 }
-div {
+
+.container {
     padding-left: 5px;
     padding-right: 10px;
     border-bottom: 0px solid #ddd;
@@ -15,6 +16,8 @@ div {
     border-left: 0px solid #ddd;
     border-right: 0px solid #ddd;
 }
+
+
 
 input {
     text-align: left;
@@ -24,11 +27,15 @@ input {
     border-radius: 15px;
     box-sizing: border-box;
     color: black;
-    font-size: 16px;            
+    font-size: 16px;  
+    padding-left: 7px; 
+    padding-top: 3px;    
+    padding-bottom: 3px;      
 }
 
 span.Back{
     background-color: #294853;
+    text-decoration: none;
     color: white;
     padding: 17px 20px;
     margin: 25px 20px;
@@ -40,21 +47,13 @@ span.Back{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-th, td {
-    padding-left: 5px;
-    padding-right: 10px;
-    border-bottom: 1px solid #ddd;
-    text-align: left;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
+a.back {
+    color: white;
+    text-decoration: none;
 }
-tr:nth-child(even) {background-color: #f2f2f2;}
 
-table {
-    border-top: 5px solid black;
-    border-collapse: collapse;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
-}
+
+
 
 body {
     padding-left: 20px;
@@ -64,7 +63,7 @@ button {
     background-color: #294853;
     color: white;
     padding: 17px 20px;
-    margin: 25px 20px;
+    margin: 25px 5px;
     border: none;
     cursor: pointer;
     width: fit-content;
