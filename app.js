@@ -78,6 +78,9 @@ app.post('/add',(req, res) => {
   });
 });
 
+app.get('/AddAssignments', function(req,res){
+    res.render("AddAssignment");
+});
 
 app.post('/addassignment',(req, res) => {
   //   var name = req.body.fname.split(' ');

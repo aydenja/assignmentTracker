@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="../StyleSheets/AddAssignment.css">
+        <link rel="stylesheet" href="../StyleSheets/AddAssignments.css">
         <title>Add Assignment</title>
         <span class="version">Version 1.0</span>
     </head>
@@ -10,15 +10,22 @@
 
         <form id="formUserDetails" action= "/addassignment" method="POST" >
             <div class="container">
-                <input type="text" placeholder="Enter Course" name="course" id="course" required><br/>
-                <input type="text" placeholder="Enter Assignment" name="assignment" id="assignment" required><br/>
-                <input type="text" placeholder="Enter Year" name="yr" id="yr" required><br/>
-                <input type="text" placeholder="Enter Month" name="mnth" id="mnth" required><br/>
-                <input type="text" placeholder="Enter Day" name="day" id="day" required><br/>
-        </div>
-              <button type="submit" class="btn" id="submit">Submit</button>
-              <span class="back"><a href="/views/Home.ejs">Back</a></span>
+                Assignment Name: <br/>
+                <input type="text" name = "aname" required><br/>
+                Class: <br/>
+                <input type="text" name = "aclass" required><br/>
+                Due Date: <br/>
+                <input type="text" name = "dday" required><br/>
+                Due Month: <br/>
+                <input type="text" name = "dmonth" required><br/>
+                Due Year: <br/>
+                <input type="text" name = "dyear" required><br/>
             </div>
-        </div>
+            
+            <div class="btns">
+                <button type="submit">Add</button>
+                <span class="Back"><a class="back" href="/home">Back</a></span>
+            </div>
+        </form>
     </body>
 </html>

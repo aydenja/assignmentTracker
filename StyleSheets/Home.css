@@ -41,15 +41,25 @@ body {
     padding-left: 20px;
 }
 
-button {
+
+.add {
+    margin-top: 35px;
+}
+
+span.addA{
     background-color: #294853;
+    text-decoration: none;
     color: white;
     padding: 17px 20px;
-    margin: 25px 20px;
     border: none;
     cursor: pointer;
     width: fit-content;
     border-radius: 15px;
     font-size: 14px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+a.addA {
+    color: white;
+    text-decoration: none;
 }
