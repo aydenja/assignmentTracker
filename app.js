@@ -60,8 +60,9 @@ app.post('/login',(req, res) => {
               loginName = out[0].fname;
               loginData = data;
               res.render("Home", {
-                name: loginName,
-                userData: loginData
+                name: loginName ,
+                uid: out[0].UserID ,
+                userData: loginData,
               });
             }
             });
@@ -117,7 +118,6 @@ app.get('/Home', function(req,res){
 app.get('/AddAssignments', function(req,res){
   console.log(req.query.aclass);
   res.render("AddAssignment", {
-    aid: req.query.aid,
     uid: req.query.uid
   });
 });
@@ -129,9 +129,27 @@ app.post('/addassignment',(req, res) => {
           console.log("err:", err);
           res.end('There was an error adding the assignment');
       } else {
-        console.log(results);
+        con.query("select fname from users where UserID = ?;", [req.body.uid], function (err, results, fields){
+              if (err) {
+                console.log("err:", err);
+              }
+              else{
+                var out = (Object.values(JSON.parse(JSON.stringify(results))));
+                con.query("select * from assignments where UserID = ?;", req.body.uid, function (err, data, fields){
+                if (err) {
+                  console.log("err:", err);
+                }
+                else{
+                  res.render("Home", {
+                    name: out[0].fname,
+                    uid: req.body.uid,
+                    userData: data
+                  });
+                }
+                });
+              }   
+            });
       }
-      res.end()
     });
 });
 
@@ -172,6 +190,7 @@ app.post('/updateA',(req, res) => {
                 else{
                   res.render("Home", {
                     name: out[0].fname,
+                    uid: req.body.uid,
                     userData: data
                   });
                 }
