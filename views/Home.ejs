@@ -37,7 +37,7 @@
                         s.replaceAll(' ', '-');
                         %>
                         <td><a href="<%=s.replaceAll(' ', '-');%>">Edit</a></td>
-                        <td><a href="/users/delete/<%=data.aid%>">Delete</a></td>
+                        <td><a action= "/del" method="POST" href="/users/delete/<%=data.aid%>">Delete</a></td>
                     </tr>
                     <%  i++; }) %>
                     <% } else{ %>

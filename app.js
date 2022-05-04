@@ -107,10 +107,34 @@ app.post('/add',(req, res) => {
 });
 
 
+app.post('/del',(req, res) => {
+
+    var name = req.body.fname.split(' ');
+    con.query("delete from assignments where aid = (?)", [req.body.aid], function (err, results, fields) {
+      if (err) {
+          console.log("err:", err);
+          res.end('There was an error adding user');
+      } else {
+          console.log(req.query.aclass);
+          res.render("AddAssignment", {
+            uid: req.query.uid
+          });
+      }
+      res.end()
+  
+    });
+  });
+
+
+
+
+
 app.get('/Home', function(req,res){
+  console.log(req.query.aclass);
   res.render("Home", {
     name: loginName,
-    userData: loginData
+    userData: loginData,
+    uid: req.query.uid
   });
 });
 
