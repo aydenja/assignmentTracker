@@ -107,20 +107,33 @@ app.post('/add',(req, res) => {
 });
 
 
-app.post('/del',(req, res) => {
+app.get('/del',(req, res) => {
 
-    var name = req.body.fname.split(' ');
-    con.query("delete from assignments where aid = (?)", [req.body.aid], function (err, results, fields) {
+    con.query("delete from assignments where aid = (?)", [req.query.aid], function (err, results, fields) {
       if (err) {
           console.log("err:", err);
-          res.end('There was an error adding user');
       } else {
-          console.log(req.query.aclass);
-          res.render("AddAssignment", {
-            uid: req.query.uid
-          });
+    con.query("select fname from users where UserID = ?;", [req.query.uid], function (err, results, fields){
+                if (err) {
+                  console.log("err:", err);
+                }
+                else{
+                  var out = (Object.values(JSON.parse(JSON.stringify(results))));
+                  con.query("select * from assignments where UserID = ?;", req.query.uid, function (err, data, fields){
+                  if (err) {
+                    console.log("err:", err);
+                  }
+                  else{
+                    res.render("Home", {
+                      name: out[0].fname,
+                      uid: req.query.uid,
+                      userData: data
+                    });
+                  }
+                  });
+                }   
+              });
       }
-      res.end()
   
     });
   });
