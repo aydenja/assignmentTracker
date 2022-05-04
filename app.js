@@ -124,7 +124,7 @@ app.get('/AddAssignments', function(req,res){
 
 app.post('/addassignment',(req, res) => {
   //   var name = req.body.fname.split(' ');
-    con.query("call addAssignment(?,?,?,?,?,?)", ["1", req.body.aclass, req.body.aname, req.body.dyear, req.body.dmonth, req.body.dday], function (err, results, fields) {
+    con.query("call addAssignment(?,?,?,?,?,?)", [req.body.uid, req.body.aclass, req.body.aname, req.body.dyear, req.body.dmonth, req.body.dday], function (err, results, fields) {
       if (err) {
           console.log("err:", err);
           res.end('There was an error adding the assignment');
