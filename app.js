@@ -34,24 +34,52 @@ app.get('/', function(req,res){
   res.render("Login");
 });
 
+var loginName;
+var loginData;
+
+app.post('/login',(req, res) => {
+  console.log(req.body);
+  con.query("call loginUser(?, ?, @output); select @output;", [req.body.Email, req.body.psw], function (err, results, fields) {
+    if (err) {
+        console.log("err:", err);
+    } else {
+      var rows = JSON.stringify(JSON.parse(JSON.stringify(results[1])));
+      console.log(rows);
+       if(rows.includes('Login Success')){
+        con.query("select fname, UserID from users where username = ?;", [req.body.Email], function (err, results, fields){
+          if (err) {
+            console.log("err:", err);
+          }
+          else{
+            var out = (Object.values(JSON.parse(JSON.stringify(results))));
+            con.query("select * from assignments where UserID = ?;", out[0].UserID, function (err, data, fields){
+            if (err) {
+              console.log("err:", err);
+            }
+            else{
+              loginName = out[0].fname;
+              loginData = data;
+              res.render("Home", {
+                name: loginName ,
+                uid: out[0].UserID ,
+                userData: loginData,
+              });
+            }
+            });
+          }   
+        });
+      }
+      else {
+        res.end("Invalid login!");
+      }  
+  }
+  });
+});
+
 app.get('/CreateUser', function(req,res){
     res.render("CreateUser", {
                   usc: false,
                 });
-});
-
-app.get('/edit', function(req,res){
-  console.log(req.query.aclass);
-  res.render("Edit", {
-    aid: req.query.aid,
-    uid: req.query.uid,
-    aname: req.query.aname,
-    aclass: req.query.aclass,
-    dday: req.query.dday,
-    dmonth: req.query.dmonth,
-    dyear: req.query.dyear
-    });
-    //res.send("userId is set to " + req.query.uid + " aname = " + req.query.aname + " class = "+ req.query.class);
 });
 
 
@@ -79,59 +107,103 @@ app.post('/add',(req, res) => {
 });
 
 
-// app.post('/add',(req, res) => {
-//     var name = req.body.fname.split(' ');
-//     con.query("call addAssignment(?,?,?,?,?)", [], function (err, results, fields) {
-//       if (err) {
-//           console.log("err:", err);
-//           res.end('There was an error adding user');
-//       } else {
-//         console.log(results);
-//       }
-//       res.end()
+app.get('/del',(req, res) => {
+
+    con.query("delete from assignments where aid = (?)", [req.query.aid], function (err, results, fields) {
+      if (err) {
+          console.log("err:", err);
+      } else {
+    con.query("select fname from users where UserID = ?;", [req.query.uid], function (err, results, fields){
+                if (err) {
+                  console.log("err:", err);
+                }
+                else{
+                  var out = (Object.values(JSON.parse(JSON.stringify(results))));
+                  con.query("select * from assignments where UserID = ?;", req.query.uid, function (err, data, fields){
+                  if (err) {
+                    console.log("err:", err);
+                  }
+                  else{
+                    res.render("Home", {
+                      name: out[0].fname,
+                      uid: req.query.uid,
+                      userData: data
+                    });
+                  }
+                  });
+                }   
+              });
+      }
   
-//     });
-//   });
+    });
+  });
 
 
 
 
-app.post('/login',(req, res) => {
-  console.log(req.body);
-  con.query("call loginUser(?, ?, @output); select @output;", [req.body.Email, req.body.psw], function (err, results, fields) {
-    if (err) {
-        console.log("err:", err);
-    } else {
-      var rows = JSON.stringify(JSON.parse(JSON.stringify(results[1])));
-      console.log(rows);
-       if(rows.includes('Login Success')){
-        con.query("select fname, UserID from users where username = ?;", [req.body.Email], function (err, results, fields){
-          if (err) {
-            console.log("err:", err);
-          }
-          else{
-            var out = (Object.values(JSON.parse(JSON.stringify(results))));
-            con.query("select * from assignments where UserID = ?;", out[0].UserID, function (err, data, fields){
-            if (err) {
-              console.log("err:", err);
-            }
-            else{
-              res.render("Home", {
-                name: out[0].fname,
-                userData: data
-              });
-            }
-            });
-          }   
-        });
-      }
-      else {
-        res.end("Invalid login!");
-      }  
-  }
-  });
+
+app.get('/Home', function(req,res){
+  console.log(req.query.aclass);
+  res.render("Home", {
+    name: loginName,
+    userData: loginData,
+    uid: req.query.uid
+  });
 });
 
+
+app.get('/AddAssignments', function(req,res){
+  console.log(req.query.aclass);
+  res.render("AddAssignment", {
+    uid: req.query.uid
+  });
+});
+
+app.post('/addassignment',(req, res) => {
+  //   var name = req.body.fname.split(' ');
+    con.query("call addAssignment(?,?,?,?,?,?)", [req.body.uid, req.body.aclass, req.body.aname, req.body.dyear, req.body.dmonth, req.body.dday], function (err, results, fields) {
+      if (err) {
+          console.log("err:", err);
+          res.end('There was an error adding the assignment');
+      } else {
+        con.query("select fname from users where UserID = ?;", [req.body.uid], function (err, results, fields){
+              if (err) {
+                console.log("err:", err);
+              }
+              else{
+                var out = (Object.values(JSON.parse(JSON.stringify(results))));
+                con.query("select * from assignments where UserID = ?;", req.body.uid, function (err, data, fields){
+                if (err) {
+                  console.log("err:", err);
+                }
+                else{
+                  res.render("Home", {
+                    name: out[0].fname,
+                    uid: req.body.uid,
+                    userData: data
+                  });
+                }
+                });
+              }   
+            });
+      }
+    });
+});
+
+
+app.get('/edit', function(req,res){
+  console.log(req.query.aclass);
+  res.render("Edit", {
+    aid: req.query.aid,
+    uid: req.query.uid,
+    aname: req.query.aname,
+    aclass: req.query.aclass,
+    dday: req.query.dday,
+    dmonth: req.query.dmonth,
+    dyear: req.query.dyear
+    });
+    //res.send("userId is set to " + req.query.uid + " aname = " + req.query.aname + " class = "+ req.query.class);
+});
 
 
 app.post('/updateA',(req, res) => {
@@ -155,6 +227,7 @@ app.post('/updateA',(req, res) => {
                 else{
                   res.render("Home", {
                     name: out[0].fname,
+                    uid: req.body.uid,
                     userData: data
                   });
                 }

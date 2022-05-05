@@ -4,61 +4,37 @@ h1 {
     text-align: left;
     padding-top: 0.4%;
     color: #60A49C;
-    font-size: 44px;
+    font-size: 35px;
     padding-bottom: 5px;
 }
 
-h2 {
-    text-align: left;
-    padding-top: 0.03%;
-    color: black;
-    font-size: 22px;
-    padding-bottom: 1px;
-}
-
-p {
-    text-align: center;
-    padding: auto;
-}
-
-th, td {
+.container {
     padding-left: 5px;
     padding-right: 10px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 0px solid #ddd;
     text-align: left;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-}
-tr:nth-child(even) {background-color: #f2f2f2;}
-
-table {
-    border-top: 5px solid black;
-    border-collapse: collapse;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
-}
-
-body {
-    padding-left: 20px;
+    border-left: 0px solid #ddd;
+    border-right: 0px solid #ddd;
 }
 
 
-.add {
-    margin-top: 35px;
-}
 
-span.addA{
-    background-color: #294853;
-    text-decoration: none;
-    color: white;
-    padding: 17px 20px;
-    border: none;
-    cursor: pointer;
-    width: fit-content;
+input {
+    text-align: left;
+    margin-top: 6px;
+    margin-bottom: 15px;
+    display: inline-block;
+    border: 1px solid #ccc;
     border-radius: 15px;
-    font-size: 14px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-sizing: border-box;
+    color: black;
+    font-size: 16px;  
+    padding-left: 8px; 
+    padding-top: 5px;    
+    padding-bottom: 3px;      
 }
-span.Logout{
+
+span.Back{
     background-color: #294853;
     text-decoration: none;
     color: white;
@@ -72,12 +48,33 @@ span.Logout{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-a.addA {
+a.back {
     color: white;
     text-decoration: none;
 }
 
-a.Logout {
+
+
+
+body {
+    padding-left: 20px;
+}
+
+button {
+    background-color: #294853;
     color: white;
-    text-decoration: none;
+    padding: 17px 20px;
+    margin: 10px 5px;
+    border: none;
+    cursor: pointer;
+    width: fit-content;
+    border-radius: 15px;
+    font-size: 14px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+span.version {
+    float: none;
+    padding: 3px;
+    font-size: 11px;
 }

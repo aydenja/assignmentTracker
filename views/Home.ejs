@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="StyleSheets/Home.css">
+        <link rel="stylesheet" href="/StyleSheets/Home.css">
     </head>
     <body>
         <h1>
@@ -37,7 +37,7 @@
                         s.replaceAll(' ', '-');
                         %>
                         <td><a href="<%=s.replaceAll(' ', '-');%>">Edit</a></td>
-                        <td><a href="/users/delete/<%=data.UserID%>">Delete</a></td>
+                        <td><a  href="/del/?aid=<%=data.aid%>&uid=<%=uid%>">Delete</a></td>
                     </tr>
                     <%  i++; }) %>
                     <% } else{ %>
@@ -47,9 +47,9 @@
                     <% } %>
                 </table>
         </div>
-        <div class="btns">
-            <button type="button" id="add" name="Add">Add Assignment</button>
-            <button type="button" id="view" name="View">View Assignments</button>
+        <div class="add">
+            <span class="addA"><a class="addA" href="/AddAssignments/?uid=<%=uid%>">Add Assignment</a></span>
+            <span class="Logout"><a class="Logout" href="/">Log out</a></span>
         </div>
     </body>
 </html>

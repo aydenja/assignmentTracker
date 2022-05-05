@@ -80,14 +80,7 @@ span.version {
     }
 }
 
-.alert {
-    padding: 20px;
-    background-color: #60A49C;
-    color: white;
-    max-width: 400px;
-    margin: auto;
-    border-radius: 25px;
-  }
+
   
   .closebtn {
     margin-left: 15px;
